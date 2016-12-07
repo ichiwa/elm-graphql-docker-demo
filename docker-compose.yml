@@ -1,0 +1,41 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    links:
+      - nodejs_app
+    ports:
+      - "80:80"
+    volumes:
+      - "./docker/etc/nginx/conf.d:/etc/nginx/conf.d"
+
+  nodejs_app:
+    build: ./src/
+    container_name: nodejs_app
+    hostname: nodejs_app
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/src
+      - /src/node_modules
+    env_file: ./src/.env
+    links:
+      - mysql
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    hostname: mysql
+    expose:
+      - 3306
+    ports:
+      - "3306:3306"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=sample"
+    volumes:
+      - "./docker/var/lib/mysql:/var/lib/mysql"
+      - "./docker/etc/mysql/conf.d:/etc/mysql/conf.d"
