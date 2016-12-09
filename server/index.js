@@ -1,6 +1,7 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import {buildSchema} from 'graphql';
+import logger from 'morgan';
 import config from 'config';
 import rdb from './rdb';
 
@@ -59,6 +60,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
   pretty: true
 }));
+app.use(logger('dev'));
 app.use(express.static('public'));
 app.listen(port, () => 
   console.log('Now browse to localhost:3000/graphql')

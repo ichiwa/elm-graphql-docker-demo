@@ -1,0 +1,40 @@
+{
+  "name": "elm-graphql-docker-example",
+  "version": "1.0.0",
+  "description": "elm graphql docker",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "export TMPDIR=/tmp; `npm bin`/webpack",
+    "webpack:w": "export TMPDIR=/tmp; `npm bin`/webpack --watch",
+    "webpack:dev": "export TMPDIR=/tmp; `npm bin`/webpack-dev-server --port 3030",
+    "start": "npm run webpack:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ichiwa/elm-graphql-docker-example.git"
+  },
+  "keywords": [
+    "docker",
+    "elm",
+    "graphql"
+  ],
+  "author": "ichiwa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ichiwa/elm-graphql-docker-example/issues"
+  },
+  "homepage": "https://github.com/ichiwa/elm-graphql-docker-example#readme",
+  "dependencies": {
+    "config": "^1.24.0",
+    "elm": "^0.18.0",
+    "elm-hot-loader": "^0.5.3",
+    "elm-webpack-loader": "^3.1.0",
+    "file-loader": "^0.9.0",
+    "webpack": "^1.12.0",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "devDependencies": {
+    "elm": "^0.18.0",
+    "elm-live": "^2.6.0"
+  }
+}

@@ -1,6 +1,9 @@
-FROM node:6-slim
+FROM node:6.9
 
 RUN npm install -g elm && elm package install -y
+
+RUN ["apt-get", "update"]
+RUN ["apt-get", "install", "-y", "vim"]
 
 COPY package.json /src/package.json
 RUN cd /src; npm install --silent --no-perm
@@ -8,7 +11,5 @@ RUN cd /src; npm install --silent --no-perm
 COPY . /src
 
 WORKDIR /src
-
-EXPOSE 3000
 
 CMD ["sh", "-c", "npm start"]

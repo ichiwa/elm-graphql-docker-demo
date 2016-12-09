@@ -4,12 +4,10 @@
   "description": "elm graphql docker",
   "main": "index.js",
   "scripts": {
-    "start:node": "`npm bin`/nodemon --exec `npm bin`/babel-node index.js",
-    "build:elm": "elm-make Main.elm --output ./public/index.html",
-    "start": "npm run build:elm && npm run start:node",
+    "start:node": "`npm bin`/nodemon --exec `npm bin`/babel-node index.js --ignore ./node_modeuls --ignore ./public",
+    "start": "npm run start:node ",
     "lint": "`npm bin`/eslint .; exit 0",
-    "lint:fix": "`npm bin`/eslint . --fix; exit 0",
-    "eslint-plugin-import": "^2.0.1"
+    "lint:fix": "`npm bin`/eslint . --fix; exit 0"
   },
   "repository": {
     "type": "git",
@@ -33,14 +31,15 @@
     "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-preset-es2015": "^6.18.0",
     "config": "^1.24.0",
-    "elm": "^0.18.0",
-    "elm-hot-loader": "^0.5.3",
-    "elm-webpack-loader": "^3.1.0",
     "express": "^4.14.0",
     "express-graphql": "^0.6.1",
+    "file-loader": "^0.9.0",
     "graphql": "^0.8.2",
+    "morgan": "^1.7.0",
     "mysql": "^2.12.0",
-    "sequelize": "^3.27.0"
+    "sequelize": "^3.27.0",
+    "webpack": "^1.12.0",
+    "webpack-dev-server": "^1.14.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",

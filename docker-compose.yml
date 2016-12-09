@@ -1,30 +1,31 @@
 version: '2'
 services:
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    links:
-      - nodejs_app
-    ports:
-      - "80:80"
-    volumes:
-      - "./docker/etc/nginx/conf.d:/etc/nginx/conf.d"
 
   nodejs_app:
-    build: ./src/
+    build: ./server
     container_name: nodejs_app
     hostname: nodejs_app
-    expose:
-      - 3000
     ports:
       - "3000:3000"
     volumes:
-      - ./src:/src
+      - ./server:/src
       - /src/node_modules
-    env_file: ./src/.env
+      - ./client/dist:/src/public
+    env_file: ./server/.env
     links:
       - mysql
-
+      
+  elm_app:
+    build: ./client
+    container_name: elm_app
+    hostname: elm_app
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./client:/src
+      - /src/node_modules
+    env_file: ./client/.env
+    
   mysql:
     image: mysql
     container_name: mysql
