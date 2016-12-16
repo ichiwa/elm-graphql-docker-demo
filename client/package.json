@@ -6,7 +6,7 @@
   "scripts": {
     "webpack": "export TMPDIR=/tmp; `npm bin`/webpack",
     "webpack:w": "export TMPDIR=/tmp; `npm bin`/webpack --watch",
-    "webpack:dev": "export TMPDIR=/tmp; `npm bin`/webpack-dev-server --port 3030",
+    "webpack:dev": "export TMPDIR=/tmp; `npm bin`/webpack-dev-server --host 0.0.0.0 --hot --inline --watch-poll",
     "start": "npm run webpack:dev"
   },
   "repository": {

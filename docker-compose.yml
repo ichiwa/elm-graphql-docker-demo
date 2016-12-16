@@ -1,17 +1,18 @@
 version: '2'
 services:
 
-  nodejs_app:
-    build: ./server
-    container_name: nodejs_app
+  node_graphal_app:
+    image: node:6.9-alpine
+    container_name: node_graphal_app
     hostname: nodejs_app
+    env_file: ./server/.env
     ports:
       - "3000:3000"
     volumes:
       - ./server:/src
-      - /src/node_modules
       - ./client/dist:/src/public
-    env_file: ./server/.env
+    working_dir: /src
+    command: ["sh", "-c", "npm install --silent --no-perm && npm start"]
     links:
       - mysql
       
@@ -19,11 +20,14 @@ services:
     build: ./client
     container_name: elm_app
     hostname: elm_app
+    expose:
+      - 8080
     ports:
-      - "3030:3030"
+      - "8080:8080"
     volumes:
       - ./client:/src
-      - /src/node_modules
+    working_dir: /src
+    command: ["sh", "-c", "npm install --silent --no-perm && npm start"]
     env_file: ./client/.env
     
   mysql:
