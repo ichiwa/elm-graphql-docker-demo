@@ -1,10 +1,6 @@
 # elm-graphql-docker-demo
 
-TODO: Put more badges here.
-
 > This is demo for elm and graphql
-
-TODO: Fill out this long description.
 
 ## Table of Contents
 
