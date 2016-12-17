@@ -65,6 +65,3 @@ app.use(express.static('public'));
 app.listen(port, () => 
   console.log('Now browse to localhost:3000/graphql')
 );
-
-
-
