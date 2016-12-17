@@ -12,7 +12,7 @@ services:
       - ./server:/src
       - ./client/dist:/src/public
     working_dir: /src
-    command: ["sh", "-c", "npm install --silent --no-perm && npm start"]
+    command: ["sh", "-c", "npm install --no-perm && npm start"]
     links:
       - mysql
       
@@ -27,7 +27,7 @@ services:
     volumes:
       - ./client:/src
     working_dir: /src
-    command: ["sh", "-c", "npm install --silent --no-perm && npm start"]
+    command: ["sh", "-c", "npm install --no-perm && npm start"]
     env_file: ./client/.env
     
   mysql:
