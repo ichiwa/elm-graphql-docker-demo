@@ -27,8 +27,8 @@ $ git clone git@github.com:ichiwa/elm-graphql-docker-demo.git
 $ make start
 ```
 
-[GraphQL](http://localhost:3000/graphql)
-[Elm(webpack-dev-server)](http://localhost:8080)
+- [GraphQL](http://localhost:3000/graphql)
+- [Elm(webpack-dev-server)](http://localhost:8080)
 
 ## Contribute
 
