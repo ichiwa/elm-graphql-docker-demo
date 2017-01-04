@@ -29,39 +29,39 @@ const schema = buildSchema(`
 `);
 
 const rootValue = {
-  user: ({id}) => {
-    return models.User.findOne({where:{id}});
-  },
-  createUser: ({data}) => {
-    return models.User.create(data);
-  },
-  updateUser: ({id, data}) => {
-    return models
+	user: ({id}) => {
+		return models.User.findOne({where: {id}});
+	},
+	createUser: ({data}) => {
+		return models.User.create(data);
+	},
+	updateUser: ({id, data}) => {
+		return models
       .User
       .findOne({where: {id}})
-      .then((user) => {
-        if (user) {
-          return user.update(data).then((updated) => updated);
-        } else {
-          return null;
-        }
-      }
+      .then(user => {
+	if (user) {
+		return user.update(data).then(updated => updated);
+	} else {
+		return null;
+	}
+}
     );
-  },
-  deleteUser: ({id}) => {
-    return models.User.destroy({where: {id}});
-  }
+	},
+	deleteUser: ({id}) => {
+		return models.User.destroy({where: {id}});
+	}
 };
 
 const app = express();
 app.use('/graphql', graphqlHTTP({
-  schema,
-  rootValue,
-  graphiql: true,
-  pretty: true
+	schema,
+	rootValue,
+	graphiql: true,
+	pretty: true
 }));
 app.use(logger('dev'));
 app.use(express.static('public'));
-app.listen(port, () => 
+app.listen(port, () =>
   console.log('Now browse to localhost:3000/graphql')
 );
