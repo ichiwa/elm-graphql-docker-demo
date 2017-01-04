@@ -6,8 +6,7 @@
   "scripts": {
     "start:node": "`npm bin`/nodemon --exec `npm bin`/babel-node index.js --ignore ./node_modeuls --ignore ./public",
     "start": "npm run start:node ",
-    "lint": "`npm bin`/eslint .; exit 0",
-    "lint:fix": "`npm bin`/eslint . --fix; exit 0"
+    "test": "xo"
   },
   "repository": {
     "type": "git",
@@ -43,8 +42,16 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
-    "eslint": "^3.10.2",
+    "eslint": "^3.12.2",
+    "eslint-config-xo-react": "^0.10.0",
     "eslint-plugin-import": "^2.2.0",
-    "nodemon": "^1.11.0"
+    "eslint-plugin-react": "^6.8.0",
+    "nodemon": "^1.11.0",
+    "xo": "^0.17.1"
+  },
+  "xo": {
+    "esnext": true,
+    "plugin": "react",
+    "extends": "xo-react"
   }
 }

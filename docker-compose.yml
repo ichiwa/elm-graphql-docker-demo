@@ -12,10 +12,10 @@ services:
       - ./server:/src
       - ./client/dist:/src/public
     working_dir: /src
-    command: ["sh", "-c", "npm install --no-perm && npm start"]
+    command: ["sh", "-c", "npm install --no-perm --silent && npm start"]
     links:
       - mysql
-      
+
   elm_app:
     build: ./client
     container_name: elm_app
@@ -27,9 +27,9 @@ services:
     volumes:
       - ./client:/src
     working_dir: /src
-    command: ["sh", "-c", "npm install --no-perm && npm start"]
+    command: ["sh", "-c", "npm install --no-perm --silent && npm start"]
     env_file: ./client/.env
-    
+
   mysql:
     image: mysql
     container_name: mysql

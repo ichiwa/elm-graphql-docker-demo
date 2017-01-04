@@ -1,40 +1,47 @@
-import Html exposing (Html, button, div, text)
-import Html.Events exposing (onClick)
+module Main exposing (..)
 
-main : Program Never Model Msg
-main =
-  Html.beginnerProgram { model = model, view = view, update = update }
+import Html exposing (..)
 
 
 -- MODEL
 
-type alias Model = Int
 
-model : Model
-model =
-  0
+type alias Model =
+    Int
 
 
--- UPDATE
 
-type Msg = Increment | Decrement
+-- Msg
 
-update : Msg -> Model -> Model
+
+type Msg
+    = Hello
+
+
+
+-- APP
+
+
+main : Program Never Int Msg
+main =
+    Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
+
+
+init : ( Model, Cmd Msg )
+init =
+    0 ! []
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    Increment ->
-      model + 1
+    model ! []
 
-    Decrement ->
-      model - 1
-
-
--- VIEW
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (toString model) ]
-    , button [ onClick Increment ] [ text "+" ]
-    ]
+    text "hello World in Elm"

@@ -1,5 +1,7 @@
 var path = require('path');
-var WriteFilePlugin = require('write-file-webpack-plugin');
+//var WriteFilePlugin = require('write-file-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
   entry: './index.js',
@@ -13,17 +15,17 @@ module.exports = {
     modulesDirectories: ['node_modules'],
     extensions: ['', '.js', '.elm']
   },
-  
+
   debug: true,
   stats: {
     colors: true,
     reasons: false
-  },  
-  
+  },
+
   watchOptions: {
     poll: true
   },
-  
+
   module: {
     loaders: [
       {
@@ -47,8 +49,22 @@ module.exports = {
     stats: 'errors-only',
     progress: true
   },
-  
+
   plugins: [
-      new WriteFilePlugin()
-  ],  
+      //new WriteFilePlugin()
+      new CopyWebpackPlugin([
+        {
+          from: './index.html',
+          to: './dist/index.html'
+        },
+        {
+          from: './index.js',
+          to: './dist/index.js'
+        }
+      ], {
+        ignore: [
+          './*.json'
+        ]
+      })
+  ],
 };
