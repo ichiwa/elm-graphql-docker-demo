@@ -3,28 +3,70 @@ module Main exposing (..)
 import Html exposing (..)
 
 
--- MODEL
+-- types
+
+
+type alias User =
+    { id : Int
+    , name : String
+    , email : String
+    }
+
+
+emptyUser : User
+emptyUser =
+    { id = 0
+    , name = ""
+    , email = ""
+    }
+
+
+
+-- models
 
 
 type alias Model =
-    Int
+    { users : List User
+    , newUser : User
+    }
 
 
 
--- Msg
+-- messages
 
 
 type Msg
-    = Hello
+    = Add
+    | Delete
 
 
 
--- APP
+-- update
 
 
-main : Program Never Int Msg
-main =
-    Html.program { init = init, view = view, update = update, subscriptions = subscriptions }
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        Add ->
+            ( model, Cmd.none )
+
+        Delete ->
+            ( model, Cmd.none )
+
+
+
+-- view
+
+
+view : Model -> Html Msg
+view model =
+    div []
+        [ h1 [] [ text "Elm with GraphQL" ]
+        ]
+
+
+
+-- unused subscriptions
 
 
 subscriptions : Model -> Sub Msg
@@ -32,16 +74,20 @@ subscriptions model =
     Sub.none
 
 
+
+-- program
+
+
+main : Program Never Model Msg
+main =
+    program
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
+
+
 init : ( Model, Cmd Msg )
 init =
-    0 ! []
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    model ! []
-
-
-view : Model -> Html Msg
-view model =
-    text "hello World in Elm"
+    ( { users = [], newUser = emptyUser }, Cmd.none )

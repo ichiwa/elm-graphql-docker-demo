@@ -42,9 +42,8 @@ const rootValue = {
       .then(user => {
         if (user) {
           return user.update(data).then(updated => updated);
-        } else {
-          return null;
         }
+        return null;
       }
     );
   },
