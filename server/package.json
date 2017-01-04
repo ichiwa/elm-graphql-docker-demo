@@ -51,6 +51,7 @@
   },
   "xo": {
     "esnext": true,
+    "space": true,
     "plugin": "react",
     "extends": "xo-react"
   }
