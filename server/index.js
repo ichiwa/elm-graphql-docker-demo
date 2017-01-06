@@ -16,6 +16,7 @@ const schema = buildSchema(`
   }
   type Query {
     user(id: Int) : User
+    users : [User]!
   }
   input UserData {
     name: String!
@@ -31,6 +32,9 @@ const schema = buildSchema(`
 const rootValue = {
   user: ({id}) => {
     return models.User.findOne({where: {id}});
+  },
+  users: () => {
+    return models.User.findAll();
   },
   createUser: ({data}) => {
     return models.User.create(data);
