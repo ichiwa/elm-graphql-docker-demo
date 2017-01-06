@@ -1,8 +1,14 @@
 module Main exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (onClick, onInput)
 
 
+-- import Http
+-- import HttpBuilder exposing (..)
+-- import Json.Decode as Decode
+-- import Json.Encode as Encode
 -- types
 
 
@@ -36,8 +42,10 @@ type alias Model =
 
 
 type Msg
-    = Add
-    | Delete
+    = AddUser
+    | DeleteUser
+    | InputUserName String
+    | InputUserEmail String
 
 
 
@@ -47,11 +55,17 @@ type Msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Add ->
+        AddUser ->
             ( model, Cmd.none )
 
-        Delete ->
+        DeleteUser ->
             ( model, Cmd.none )
+
+        InputUserName name ->
+            ( { model | newUser = { id = model.newUser.id, name = name, email = model.newUser.email } }, Cmd.none )
+
+        InputUserEmail email ->
+            ( { model | newUser = { id = model.newUser.id, name = model.newUser.name, email = email } }, Cmd.none )
 
 
 
@@ -61,7 +75,13 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Elm with GraphQL" ]
+        [ h1 []
+            [ text "Elm with GraphQL" ]
+        , input [ type_ "text", placeholder "Name Here", onInput InputUserName ] []
+        , input [ type_ "text", placeholder "Email Here", onInput InputUserEmail ] []
+        , button
+            [ onClick AddUser ]
+            [ text "Add User" ]
         ]
 
 
@@ -90,4 +110,8 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { users = [], newUser = emptyUser }, Cmd.none )
+    let
+        _ =
+            Debug.log "Debug" "init"
+    in
+        ( { users = [], newUser = emptyUser }, Cmd.none )

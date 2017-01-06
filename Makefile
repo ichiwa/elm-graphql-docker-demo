@@ -46,3 +46,11 @@ ifeq (logs,$(firstword $(MAKECMDGOALS)))
 endif
 logs: ## Display container's log : ## make logs
 	docker-compose -f docker-compose.yml -p $(PROJECT) logs --follow --timestamps $(RUN_ARGS)
+
+.PHONY: build
+	ifeq (build,$(firstword $(MAKECMDGOALS)))
+	  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+	  $(eval $(RUN_ARGS):;@:)
+	endif
+build:
+	docker exec -it elm_app npm run webpack
